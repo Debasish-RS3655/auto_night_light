@@ -1,7 +1,7 @@
 #include <Ultrasonic.h>
 
 #define SENSOR_PIN 2
-#define RELAY_PIN LED_BUILTIN
+#define RELAY_PIN 3
 
 const int Trig = 6;
 const int Echo = 7;
@@ -11,6 +11,7 @@ Ultrasonic ultrasonic(Trig, Echo); //Trigger and Echo respectively
 void setup() {
   // put your setup code here, to run once:
   pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(RELAY_PIN, OUTPUT);
   pinMode(SENSOR_PIN, INPUT);
   Serial.begin(9600);
 }
@@ -19,7 +20,7 @@ void loop() {
   int distance = ultrasonic.Ranging(CM); // (Use CM for centimeter and INC for inches)
   delay(40);    // delay added to make things stable
   int sensorValue = digitalRead(SENSOR_PIN);
-  deMlay(40);
+  delay(40);
 
   if (sensorValue == HIGH || distance < 40) {
     digitalWrite(RELAY_PIN, HIGH); // LOW to switch on the light
